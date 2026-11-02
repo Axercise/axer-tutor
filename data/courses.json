@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "gsd-framework",
+    "title": "GSD Framework for Claude",
+    "titleTh": "GSD Framework สำหรับ Claude",
+    "description": "Stop wasting tokens. Learn how to use the GSD (Get Shit Done) framework to fix Claude's context rot problem and build AI-powered workflows that actually work across sessions.",
+    "descriptionTh": "หยุดเสีย token ฟรีๆ เรียนรู้การใช้ GSD Framework แก้ปัญหา Context Rot ของ Claude และสร้าง AI workflow ที่ใช้งานได้จริงข้ามทุก session",
+    "emoji": "⚡",
+    "tag": "AI Workflow",
+    "tagTh": "AI Workflow",
+    "color": "violet",
+    "lessons": [
+      { "slug": "lesson-1", "title": "What is Context Rot?", "titleTh": "Context Rot คืออะไร?", "duration": "8 min", "videoId": "" },
+      { "slug": "lesson-2", "title": "How GSD Fixes It", "titleTh": "GSD แก้ปัญหายังไง", "duration": "12 min", "videoId": "" },
+      { "slug": "lesson-3", "title": "Install & Setup GSD", "titleTh": "ติดตั้งและตั้งค่า GSD", "duration": "10 min", "videoId": "" }
+    ]
+  }
+]
