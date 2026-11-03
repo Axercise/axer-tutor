@@ -1,82 +1,100 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import ManifestoQuote from '@/components/ManifestoQuote'
 import { useLang } from '@/context/LanguageContext'
-import { useEffect, useRef, useState } from 'react'
 
 const content = {
   en: {
-    badge: 'IT Student · Creator · AI Enthusiast',
-    quote: '"Not everyone learns the same way. That\'s not a flaw — that\'s the system failing you."',
-    name: 'Tammadon Suksa',
-    aka: 'aka Axer',
-    role: 'IT Student @ KMITL · Year 1',
-    desc: "I used to be the student who zoned out in every class. Not because I was dumb — because the way we teach hasn't caught up with how we actually think. So I decided to change that.",
-    browse: 'Browse Courses',
-    about: 'About Me',
+    eyebrow: 'AXERMOREEXER / LEARN THE NEXT',
+    title: 'Learn fast enough for a world that will not wait.',
+    identity: 'Tammadon Suksa / Axer',
+    role: 'IT student at KMITL · building better ways to learn',
+    intro: 'Practical AI, coding, and foundations—made into focused lessons that leave you with something you can actually use.',
+    browse: 'Start learning',
+    about: 'Meet Axer',
+    profileFile: 'axer.profile.ts',
+    profileStatus: 'building in public',
     stats: [
-      { num: '5+', label: 'Courses' },
-      { num: '100%', label: 'Free to access' },
-      { num: 'Short', label: 'Bite-sized lessons' },
+      { value: '01', label: 'clear idea at a time' },
+      { value: '100%', label: 'free to explore' },
+      { value: '0', label: 'hours of filler' },
     ],
-    missionTitle: 'Why this exists',
-    missionDesc: "Attention spans are shrinking. Classrooms haven't changed. There's a gap — and I'm building the bridge. Every lesson here is short, direct, and built for the way your brain actually works in 2025.",
-    topicsTitle: 'What I teach',
+    missionKicker: 'THE MISSION',
+    missionTitle: 'The old way asks you to keep up. This one helps you move.',
+    missionText: 'Technology changes too quickly for learning to stay passive. AxerMoreExer turns useful ideas into short routes from curiosity to action.',
+    missionCode: 'const learning = clarity + action',
+    missionPoints: [
+      { label: '01', title: 'Find the signal', desc: 'Start with the idea that matters, not an endless syllabus.' },
+      { label: '02', title: 'Make it real', desc: 'Use it in a small project before the momentum disappears.' },
+      { label: '03', title: 'Keep evolving', desc: 'Return with better questions as the tools and world change.' },
+    ],
+    methodKicker: 'THE LEARNING LOOP',
+    methodTitle: 'Built for doing, not just watching.',
+    method: [
+      { code: '01', title: 'Understand the why', desc: 'Get the context and the mental model without the detour.' },
+      { code: '02', title: 'Try the how', desc: 'Turn the idea into a prompt, workflow, feature, or first draft.' },
+      { code: '03', title: 'Build your edge', desc: 'Keep the method and adapt it to the work that matters to you.' },
+    ],
+    topicsKicker: 'WHAT WE EXPLORE',
+    topicsTitle: 'Tools change. Clear thinking stays.',
     topics: [
-      { icon: '🤖', title: 'AI Workflows', desc: 'GSD, MCP, Prompt Engineering — practical AI for real use.' },
-      { icon: '💻', title: 'Vibe Coding', desc: 'What every AI-assisted developer needs to know.' },
-      { icon: '🔐', title: 'Personal AI Tools', desc: 'Build your own AI secretary, assistant, and automation.' },
-      { icon: '📐', title: 'CS Fundamentals', desc: 'DSA, math, and the foundations that actually matter.' },
+      { code: 'ai.workflow()', title: 'AI Workflows', desc: 'Prompts, agents, MCP, and systems that remove friction from real work.' },
+      { code: 'build.with(ai)', title: 'Vibe Coding', desc: 'How to work with AI while still understanding what you are building.' },
+      { code: 'automate.self()', title: 'Personal AI Tools', desc: 'Useful assistants and automations shaped around your own routines.' },
+      { code: 'fundamentals()', title: 'CS Foundations', desc: 'The math, logic, and DSA that make modern tools more powerful.' },
     ],
-    testimonialTitle: 'What people say',
-    testimonials: [
-      {
-        quote: "I was even confused asking AI. Then I watched Axer's clip — just a few minutes and every problem was solved.",
-        name: 'Anonymous Student',
-        role: 'First-year university student',
-      },
-    ],
-    socials: 'Find me on',
-    ctaTitle: 'Ready to learn differently?',
-    ctaDesc: 'No 3-hour lectures. No boring slides. Just short, clear lessons that respect your time.',
-    ctaBrowse: 'Start Learning',
+    ctaKicker: 'YOUR NEXT STEP',
+    ctaTitle: 'Do not wait for the perfect way to learn.',
+    ctaText: 'Open one lesson. Build one useful thing. Then take the next step.',
+    ctaBrowse: 'Explore courses',
+    socials: 'Find Axer on',
   },
   th: {
-    badge: 'นักศึกษา IT · ครีเอเตอร์ · คนติด AI',
-    quote: '"ทุกคนไม่ได้เรียนรู้แบบเดียวกัน นั่นไม่ใช่ความผิดของคุณ — แต่เป็นระบบที่ล้มเหลว"',
-    name: 'ธรรมดล สุขสะ',
-    aka: 'หรือที่รู้จักกันในชื่อ Axer',
-    role: 'นักศึกษา IT @ KMITL · ปี 1',
-    desc: 'ผมเคยเป็นเด็กที่นั่งเหม่อในห้องเรียนทุกวิชา ไม่ใช่เพราะโง่ แต่เพราะวิธีการสอนมันไม่ได้ถูกออกแบบมาสำหรับสมองของเรา ผมเลยตัดสินใจเปลี่ยนมันเอง',
-    browse: 'ดูหลักสูตร',
-    about: 'เกี่ยวกับผม',
+    eyebrow: 'AXERMOREEXER / เรียนรู้สิ่งถัดไป',
+    title: 'เรียนรู้ให้ทันโลกที่ไม่เคยรอใคร',
+    identity: 'ธรรมดล สุขสะ / Axer',
+    role: 'นักศึกษา IT ที่ KMITL · กำลังสร้างวิธีเรียนรู้ที่ดีกว่า',
+    intro: 'AI, coding และพื้นฐานสำคัญที่นำมาทำให้เป็นบทเรียนตรงประเด็น เพื่อให้คุณได้บางอย่างที่ใช้ต่อได้จริง',
+    browse: 'เริ่มเรียนรู้',
+    about: 'รู้จัก Axer',
+    profileFile: 'axer.profile.ts',
+    profileStatus: 'กำลังสร้างให้ทุกคนเห็น',
     stats: [
-      { num: '5+', label: 'หลักสูตร' },
-      { num: '100%', label: 'เรียนฟรี' },
-      { num: 'สั้น', label: 'บทเรียนกระชับ' },
+      { value: '01', label: 'ไอเดียที่ชัดเจนต่อครั้ง' },
+      { value: '100%', label: 'เรียนรู้ได้ฟรี' },
+      { value: '0', label: 'ชั่วโมงของเนื้อหาเกินจำเป็น' },
     ],
-    missionTitle: 'ทำไมถึงสร้างสิ่งนี้ขึ้นมา',
-    missionDesc: 'สมาธิของคนเราสั้นลงทุกวัน แต่ห้องเรียนยังไม่เปลี่ยน มีช่องว่างอยู่ตรงนั้น และผมกำลังสร้างสะพานเชื่อม ทุก lesson ที่นี่สั้น ตรงประเด็น และออกแบบมาสำหรับสมองที่ทำงานอยู่ในยุค 2025',
-    topicsTitle: 'สอนเรื่องอะไรบ้าง',
+    missionKicker: 'เป้าหมายของเรา',
+    missionTitle: 'ระบบเดิมบอกให้คุณตามให้ทัน แต่ที่นี่ช่วยให้คุณก้าวไปข้างหน้า',
+    missionText: 'เทคโนโลยีเปลี่ยนเร็วเกินกว่าการเรียนรู้จะเป็นเพียงการนั่งฟัง AxerMoreExer จึงเปลี่ยนไอเดียที่มีประโยชน์ให้เป็นเส้นทางสั้น ๆ จากความสงสัยไปสู่การลงมือทำ',
+    missionCode: 'const learning = clarity + action',
+    missionPoints: [
+      { label: '01', title: 'หาแก่นของเรื่อง', desc: 'เริ่มจากไอเดียที่สำคัญ ไม่ใช่หลักสูตรที่ยาวจนไม่รู้จะเริ่มตรงไหน' },
+      { label: '02', title: 'ทำให้เป็นของจริง', desc: 'ใช้มันกับโปรเจกต์เล็ก ๆ ก่อนที่แรงผลักดันจะหายไป' },
+      { label: '03', title: 'พัฒนาต่อเสมอ', desc: 'กลับมาพร้อมคำถามที่ดีขึ้น เมื่อเครื่องมือและโลกเปลี่ยนไป' },
+    ],
+    methodKicker: 'วงจรการเรียนรู้',
+    methodTitle: 'ออกแบบมาเพื่อการลงมือทำ ไม่ใช่แค่การดู',
+    method: [
+      { code: '01', title: 'เข้าใจเหตุผล', desc: 'ได้ทั้งบริบทและวิธีคิด โดยไม่ต้องอ้อมไกล' },
+      { code: '02', title: 'ลองทำจริง', desc: 'เปลี่ยนไอเดียให้เป็น prompt, workflow, feature หรือร่างแรกของคุณ' },
+      { code: '03', title: 'สร้างความได้เปรียบ', desc: 'เก็บวิธีคิดไว้ แล้วปรับใช้กับงานที่สำคัญสำหรับคุณ' },
+    ],
+    topicsKicker: 'สิ่งที่เราสำรวจ',
+    topicsTitle: 'เครื่องมือเปลี่ยนไป แต่การคิดให้ชัดยังสำคัญเสมอ',
     topics: [
-      { icon: '🤖', title: 'AI Workflows', desc: 'GSD, MCP, Prompt Engineering — AI ที่ใช้งานได้จริง' },
-      { icon: '💻', title: 'Vibe Coding', desc: 'สิ่งที่นักพัฒนายุค AI ต้องรู้' },
-      { icon: '🔐', title: 'AI ส่วนตัว', desc: 'สร้าง AI secretary และระบบ automation ของตัวเอง' },
-      { icon: '📐', title: 'CS พื้นฐาน', desc: 'DSA คณิตศาสตร์ และรากฐานที่สำคัญจริงๆ' },
+      { code: 'ai.workflow()', title: 'AI Workflows', desc: 'Prompts, agents, MCP และระบบที่ลดความฝืดในการทำงานจริง' },
+      { code: 'build.with(ai)', title: 'Vibe Coding', desc: 'วิธีทำงานร่วมกับ AI โดยยังเข้าใจสิ่งที่คุณกำลังสร้างอยู่' },
+      { code: 'automate.self()', title: 'AI ส่วนตัว', desc: 'ผู้ช่วยและ automation ที่ออกแบบรอบวิธีทำงานของคุณเอง' },
+      { code: 'fundamentals()', title: 'CS พื้นฐาน', desc: 'คณิตศาสตร์ ตรรกะ และ DSA ที่ช่วยให้ใช้เครื่องมือยุคใหม่ได้เก่งขึ้น' },
     ],
-    testimonialTitle: 'เสียงจากคนที่ดู',
-    testimonials: [
-      {
-        quote: 'ขนาดถาม AI ยังงงไปงงมาเลย พอมาดูคลิปพี่ แปปเดียว ไม่กี่นาที ปัญหาทุกอย่างถูกแก้ไขหมดเลย',
-        name: 'น้องนักศึกษา',
-        role: 'นักศึกษาปี 1',
-      },
-    ],
-    socials: 'ติดตามได้ที่',
-    ctaTitle: 'พร้อมเรียนรู้แบบใหม่แล้วหรือยัง?',
-    ctaDesc: 'ไม่มีการบรรยาย 3 ชั่วโมง ไม่มีสไลด์น่าเบื่อ แค่บทเรียนสั้นๆ ที่เคารพเวลาของคุณ',
-    ctaBrowse: 'เริ่มเรียนเลย',
+    ctaKicker: 'ก้าวต่อไปของคุณ',
+    ctaTitle: 'อย่ารอวิธีเรียนรู้ที่สมบูรณ์แบบ',
+    ctaText: 'เปิดหนึ่งบทเรียน สร้างหนึ่งสิ่งที่มีประโยชน์ แล้วก้าวต่อไป',
+    ctaBrowse: 'ดูหลักสูตร',
+    socials: 'ติดตาม Axer ได้ที่',
   },
 }
 
@@ -85,208 +103,61 @@ const socials = [
   { label: 'Instagram', href: 'https://instagram.com' },
   { label: 'TikTok', href: 'https://tiktok.com' },
   { label: 'GitHub', href: 'https://github.com' },
-  { label: 'Facebook', href: 'https://facebook.com' },
 ]
 
 export default function Home() {
   const { lang } = useLang()
   const t = content[lang]
-  const cursorRef = useRef<HTMLDivElement>(null)
-  const cursorDotRef = useRef<HTMLDivElement>(null)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-    const move = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`
-      }
-      if (cursorDotRef.current) {
-        cursorDotRef.current.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`
-      }
-    }
-    window.addEventListener('mousemove', move)
-    return () => window.removeEventListener('mousemove', move)
-  }, [])
 
   return (
-    <div className="pt-14 min-h-screen bg-zinc-950 overflow-x-hidden">
-
-      {/* Custom Cursor */}
-      {mounted && (
-        <>
-          <div
-            ref={cursorRef}
-            className="pointer-events-none fixed top-0 left-0 z-[9999] w-10 h-10 rounded-full border border-violet-500/60 transition-transform duration-100 ease-out"
-            style={{ boxShadow: '0 0 12px rgba(139,92,246,0.4)' }}
-          />
-          <div
-            ref={cursorDotRef}
-            className="pointer-events-none fixed top-0 left-0 z-[9999] w-2 h-2 rounded-full bg-violet-400 transition-transform duration-75 ease-out"
-            style={{ boxShadow: '0 0 8px rgba(139,92,246,0.9)' }}
-          />
-        </>
-      )}
-
-      {/* Hero */}
-      <section className="max-w-5xl mx-auto px-8 pt-24 pb-20">
-        <div className="flex flex-col md:flex-row items-center gap-16">
-          {/* Left */}
-          <div className="flex-1">
-            <p className="text-violet-400 text-sm font-medium mb-6 tracking-wide">{t.badge}</p>
-            <h1 className="text-5xl font-bold text-white leading-tight mb-2">{t.name}</h1>
-            <p className="text-zinc-500 text-base mb-6">{t.aka} — {t.role}</p>
-            <p className="text-zinc-400 text-lg leading-relaxed mb-10 max-w-lg">{t.desc}</p>
-            <div className="flex gap-4 flex-wrap">
-              <Link href="/courses" className="bg-violet-600 hover:bg-violet-500 text-white px-6 py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5">
-                {t.browse}
-              </Link>
-              <Link href="/about" className="border border-zinc-700 hover:border-violet-500/50 text-white px-6 py-3 rounded-lg font-medium transition-all hover:-translate-y-0.5">
-                {t.about}
-              </Link>
+    <div className="min-h-screen overflow-hidden bg-zinc-950 pt-14">
+      <section className="relative">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.07)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
+        <div className="pointer-events-none absolute -right-28 top-8 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
+        <div className="relative mx-auto grid max-w-6xl gap-14 px-6 py-16 md:grid-cols-[1.15fr_0.85fr] md:items-center md:px-8 md:py-24">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.2em] text-violet-400">{t.eyebrow}</p>
+            <h1 className="mt-5 max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">{t.title}</h1>
+            <p className="mt-6 max-w-xl text-base leading-7 text-zinc-400 sm:text-lg">{t.intro}</p>
+            <ManifestoQuote compact className="mt-8 max-w-xl" />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/courses" className="rounded-lg bg-violet-600 px-5 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-500/25">{t.browse}</Link>
+              <Link href="/about" className="rounded-lg border border-zinc-700 px-5 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:border-violet-500/50 hover:text-violet-300">{t.about}</Link>
             </div>
           </div>
 
-          {/* Right — Profile */}
-          <div className="flex-shrink-0 relative">
-            {/* Glow ring */}
-            <div
-              className="absolute inset-0 rounded-2xl animate-pulse"
-              style={{
-                background: 'radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%)',
-                filter: 'blur(20px)',
-                transform: 'scale(1.3)',
-              }}
-            />
-            <div
-              className="relative w-56 h-56 rounded-2xl overflow-hidden border border-violet-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl cursor-none"
-              style={{ boxShadow: '0 0 30px rgba(139,92,246,0.2), 0 0 60px rgba(139,92,246,0.1)' }}
-            >
-              <Image
-                src="/axerPic.png"
-                alt="Axer"
-                fill
-                className="object-cover"
-              />
+          <div className="relative mx-auto flex min-h-[25rem] w-full max-w-sm items-end justify-center sm:min-h-[29rem] md:min-h-[32rem]">
+            <div className="absolute bottom-14 left-1/2 h-60 w-60 -translate-x-1/2 rounded-full bg-violet-500/35 blur-3xl" />
+            <div className="absolute inset-x-2 bottom-10 top-10 border-x border-t border-violet-500/25" />
+            <p className="absolute left-5 top-14 font-mono text-[10px] tracking-[0.15em] text-violet-400">{t.profileFile}</p>
+            <p className="absolute right-5 top-14 font-mono text-[10px] text-zinc-500">{'// 2026'}</p>
+            <Image src="/axerPic.png" alt="Axer" width={310} height={410} priority className="relative z-10 w-auto max-w-[82%] object-contain drop-shadow-[0_25px_36px_rgba(76,29,149,0.55)] transition-transform duration-500 hover:-translate-y-2 sm:max-w-[88%]" />
+            <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between border-t border-zinc-800 bg-zinc-950/70 px-4 py-3 backdrop-blur-sm">
+              <p className="text-xs font-medium text-white">{t.identity}</p>
+              <p className="text-[10px] text-emerald-400"><span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />{t.profileStatus}</p>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Stats */}
-        <div className="flex gap-16 mt-16 pt-10 border-t border-zinc-800">
-          {t.stats.map((s) => (
-            <div key={s.label} className="group">
-              <div className="text-2xl font-bold text-white group-hover:text-violet-400 transition-colors">{s.num}</div>
-              <div className="text-sm text-zinc-500 mt-1">{s.label}</div>
-            </div>
-          ))}
+      <section className="border-y border-zinc-800 bg-zinc-900/20">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-zinc-800 px-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0 md:px-8">
+          {t.stats.map((stat) => <div key={stat.label} className="py-7 sm:px-7 sm:py-8 first:pl-0 last:pr-0"><p className="font-mono text-2xl font-semibold text-white">{stat.value}</p><p className="mt-2 text-sm text-zinc-500">{stat.label}</p></div>)}
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="border-y border-zinc-800 bg-zinc-900/30 relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.3) 0%, transparent 70%)' }}
-        />
-        <div className="max-w-5xl mx-auto px-8 py-16 text-center relative">
-          <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed max-w-3xl mx-auto">
-            {t.quote}
-          </p>
-          <p className="text-zinc-500 text-sm mt-6">— Axer</p>
+      <section className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[0.9fr_1.1fr] md:px-8 md:py-28">
+        <div><p className="text-xs font-semibold tracking-[0.2em] text-violet-400">{t.missionKicker}</p><h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">{t.missionTitle}</h2><p className="mt-6 max-w-md text-base leading-7 text-zinc-400">{t.missionText}</p><p className="mt-8 font-mono text-xs text-violet-400"><span className="mr-3 text-zinc-600">$</span>{t.missionCode}</p></div>
+        <div className="grid gap-px overflow-hidden rounded-xl border border-zinc-800 bg-zinc-800">
+          {t.missionPoints.map((point) => <article key={point.label} className="group bg-zinc-950 p-6 transition-colors hover:bg-zinc-900/50 sm:p-7"><p className="font-mono text-xs text-violet-400">{point.label}</p><h3 className="mt-5 text-lg font-semibold text-white group-hover:text-violet-300">{point.title}</h3><p className="mt-2 text-sm leading-6 text-zinc-400">{point.desc}</p></article>)}
         </div>
       </section>
 
-      {/* Mission */}
-      <section className="max-w-5xl mx-auto px-8 py-20">
-        <p className="text-violet-400 text-sm font-medium mb-3 tracking-wide uppercase">{t.missionTitle}</p>
-        <p className="text-zinc-300 text-xl leading-relaxed max-w-2xl">{t.missionDesc}</p>
-      </section>
+      <section className="border-y border-zinc-800 bg-zinc-900/20"><div className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-24"><p className="text-xs font-semibold tracking-[0.2em] text-violet-400">{t.methodKicker}</p><h2 className="mt-5 max-w-xl text-3xl font-bold tracking-tight text-white sm:text-4xl">{t.methodTitle}</h2><div className="mt-10 grid gap-4 md:grid-cols-3">{t.method.map((step) => <article key={step.code} className="rounded-xl border border-zinc-800 bg-zinc-950/70 p-6 transition-all hover:-translate-y-1 hover:border-violet-500/40 hover:shadow-[0_12px_30px_rgba(139,92,246,0.12)]"><p className="font-mono text-xs text-violet-400">step_{step.code}</p><h3 className="mt-8 text-lg font-semibold text-white">{step.title}</h3><p className="mt-3 text-sm leading-6 text-zinc-400">{step.desc}</p></article>)}</div></div></section>
 
-      {/* Topics */}
-      <section className="border-t border-zinc-800 bg-zinc-900/20">
-        <div className="max-w-5xl mx-auto px-8 py-20">
-          <p className="text-violet-400 text-sm font-medium mb-8 tracking-wide uppercase">{t.topicsTitle}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {t.topics.map((topic) => (
-              <div
-                key={topic.title}
-                className="border border-zinc-800 rounded-xl p-6 bg-zinc-900/50 transition-all duration-300 hover:-translate-y-1 hover:border-violet-500/40 group"
-                style={{ '--tw-shadow': '0 0 20px rgba(139,92,246,0.1)' } as React.CSSProperties}
-                onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 8px 30px rgba(139,92,246,0.15)')}
-                onMouseLeave={e => (e.currentTarget.style.boxShadow = 'none')}
-              >
-                <div className="text-3xl mb-3">{topic.icon}</div>
-                <h3 className="text-white font-semibold mb-2 group-hover:text-violet-300 transition-colors">{topic.title}</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">{topic.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28"><p className="text-xs font-semibold tracking-[0.2em] text-violet-400">{t.topicsKicker}</p><h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">{t.topicsTitle}</h2><div className="mt-10 grid gap-4 md:grid-cols-2">{t.topics.map((topic) => <article key={topic.code} className="group rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 transition-all hover:-translate-y-1 hover:border-violet-500/40 hover:shadow-[0_12px_30px_rgba(139,92,246,0.12)] sm:p-7"><p className="font-mono text-xs text-violet-400">{topic.code}</p><h3 className="mt-7 text-xl font-semibold text-white transition-colors group-hover:text-violet-300">{topic.title}</h3><p className="mt-3 max-w-md text-sm leading-6 text-zinc-400">{topic.desc}</p></article>)}</div></section>
 
-      {/* Testimonials */}
-      <section className="max-w-5xl mx-auto px-8 py-20">
-        <p className="text-violet-400 text-sm font-medium mb-8 tracking-wide uppercase">{t.testimonialTitle}</p>
-        <div className="grid grid-cols-1 gap-4">
-          {t.testimonials.map((item, i) => (
-            <div
-              key={i}
-              className="border border-zinc-800 rounded-xl p-8 bg-zinc-900/30 relative overflow-hidden transition-all duration-300 hover:-translate-y-1"
-              onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 8px 30px rgba(139,92,246,0.1)')}
-              onMouseLeave={e => (e.currentTarget.style.boxShadow = 'none')}
-            >
-              <div className="text-violet-500/20 text-8xl absolute top-2 left-4 font-serif leading-none select-none">"</div>
-              <p className="text-zinc-300 text-lg leading-relaxed mb-6 relative">{item.quote}</p>
-              <div>
-                <p className="text-white font-medium text-sm">{item.name}</p>
-                <p className="text-zinc-500 text-xs mt-0.5">{item.role}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Socials */}
-      <section className="border-t border-zinc-800">
-        <div className="max-w-5xl mx-auto px-8 py-16">
-          <p className="text-zinc-500 text-sm mb-6">{t.socials}</p>
-          <div className="flex flex-wrap gap-3">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 border border-zinc-800 hover:border-violet-500/50 hover:text-violet-400 rounded-lg text-zinc-400 text-sm transition-all duration-200 hover:-translate-y-0.5"
-                onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 4px 15px rgba(139,92,246,0.15)')}
-                onMouseLeave={e => (e.currentTarget.style.boxShadow = 'none')}
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="border-t border-zinc-800 relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.5) 0%, transparent 70%)' }}
-        />
-        <div className="max-w-5xl mx-auto px-8 py-24 text-center relative">
-          <h2 className="text-3xl font-bold text-white mb-4">{t.ctaTitle}</h2>
-          <p className="text-zinc-400 mb-8 max-w-md mx-auto">{t.ctaDesc}</p>
-          <Link
-            href="/courses"
-            className="bg-violet-600 hover:bg-violet-500 text-white px-8 py-3 rounded-lg font-medium transition-all inline-block hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-500/30"
-          >
-            {t.ctaBrowse}
-          </Link>
-        </div>
-      </section>
-
+      <section className="relative overflow-hidden border-t border-zinc-800"><div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.16),transparent_65%)]" /><div className="relative mx-auto flex max-w-6xl flex-col justify-between gap-12 px-6 py-20 md:flex-row md:items-end md:px-8 md:py-24"><div className="max-w-xl"><p className="text-xs font-semibold tracking-[0.2em] text-violet-400">{t.ctaKicker}</p><h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">{t.ctaTitle}</h2><p className="mt-4 text-base leading-7 text-zinc-400">{t.ctaText}</p><Link href="/courses" className="mt-8 inline-flex rounded-lg bg-violet-600 px-5 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-violet-500 hover:shadow-lg hover:shadow-violet-500/25">{t.ctaBrowse} <span aria-hidden="true" className="ml-2">→</span></Link></div><div><p className="mb-4 text-xs text-zinc-500 md:text-right">{t.socials}</p><div className="flex flex-wrap gap-2 md:justify-end">{socials.map((social) => <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-zinc-700 px-3 py-2 text-xs text-zinc-400 transition-colors hover:border-violet-500/50 hover:text-violet-300">{social.label}</a>)}</div></div></div></section>
     </div>
   )
 }

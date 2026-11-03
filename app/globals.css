@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: #09090b;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+html.light {
+  color-scheme: light;
+  background: #fafafa;
+}
+
+html.light .bg-zinc-950 { background-color: #fafafa; }
+html.light .bg-zinc-950\/80 { background-color: rgb(250 250 250 / 0.84); }
+html.light .bg-zinc-900\/50 { background-color: rgb(255 255 255 / 0.82); }
+html.light .bg-zinc-900\/40 { background-color: rgb(255 255 255 / 0.72); }
+html.light .bg-zinc-900\/30 { background-color: rgb(244 244 245 / 0.75); }
+html.light .bg-zinc-900\/20 { background-color: rgb(244 244 245 / 0.72); }
+html.light .bg-zinc-900 { background-color: #f4f4f5; }
+html.light .bg-zinc-800 { background-color: #e4e4e7; }
+html.light .border-zinc-800 { border-color: #e4e4e7; }
+html.light .border-zinc-700 { border-color: #d4d4d8; }
+html.light .text-white { color: #18181b; }
+html.light .text-zinc-300 { color: #3f3f46; }
+html.light .text-zinc-400 { color: #52525b; }
+html.light .text-zinc-500 { color: #71717a; }
+html.light .text-zinc-600 { color: #a1a1aa; }
+html.light .hover\:text-white:hover { color: #18181b; }
+html.light .hover\:bg-violet-500:hover { color: white; }
+
 .prose {
   color: #a1a1aa;
   line-height: 1.75;
@@ -104,3 +136,16 @@
   color: #7c3aed;
   text-decoration: underline;
 }
+
+html.light .prose { color: #3f3f46; }
+html.light .prose h1,
+html.light .prose h2,
+html.light .prose h3,
+html.light .prose strong { color: #18181b; }
+html.light .prose h2 { border-color: #e4e4e7; }
+html.light .prose p,
+html.light .prose li { color: #3f3f46; }
+html.light .prose code { background: #f4f4f5; border-color: #d4d4d8; color: #6d28d9; }
+html.light .prose pre { background: #18181b; border-color: #27272a; }
+html.light .prose pre code { color: #e4e4e7; }
+html.light .prose hr { border-color: #e4e4e7; }
